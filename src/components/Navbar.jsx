@@ -1,10 +1,11 @@
 
 
 
-import Link from 'next/link';
+// import Link from 'next/link';
 // import logoImg from '../../assets/image/logo.png'
 import { FaGithub } from 'react-icons/fa';
 import Image from 'next/image';
+import MyLink from './shared/Navbar/MyLink';
 
 
 const Navbar = () => {
@@ -20,7 +21,7 @@ const Navbar = () => {
       },
 
       {
-        path:"/installedApps",
+        path:"/installation",
         text:"Installation",
       },
       {
@@ -51,8 +52,8 @@ const Navbar = () => {
                   <ul className="flex justify-center items-center gap-5">
 
                       {
-                        navItems.map((item, index) =>   <Link key={index} href={item.path} 
-                                >{item.text}</Link>)
+                        navItems.map((item, index) => <MyLink key={index} href={item.path}>{item.text}</MyLink>
+                        )
                       }
                      
 

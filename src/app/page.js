@@ -1,10 +1,13 @@
-import Image from "next/image";
+import Banner from "@/components/homepage/Banner";
+import Stats from "@/components/homepage/Stats";
+
 
 export default function Home() {
   return (
     <div className="p-8">
-      <h1 className="text-2xl font-bold">Play Store Next Project</h1>
-      <p>Welcome to the home page!</p>
+         <Banner/>
+         <Stats/>
+
     </div>
   );
 }
