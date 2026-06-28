@@ -1,36 +1,40 @@
+import Link from "next/link";
 import AppCard from "../UI/AppCard";
-// import HashLoader from "react-spinners/HashLoader";
-import { Link } from "react-router";
-import useApps from "../hooks/useApps";
 
-const TrendingApps = () => {
-  const { apps, loading } = useApps();
+
+// import useApps from "../hooks/useApps";
+  const appsPromise = async function(){
+       const res = await fetch('http://localhost:3000/data.json')
+        const data = await res.json()
+        return data;
+  }
+
+
+const TrendingApps = async ({from}) => {
+    const apps = await appsPromise();
+    console.log(from, "from");
+  // const { apps, loading } = useApps();
 
   return (
     <div className="container mx-auto my-[60px]">
       <div className="mb-8 text-center">
-        <h2 className="font-bold text-4xl">Trending apps</h2>
+        <h2 className="font-bold text-4xl">{from === "homepage" ? "Trending Apps" : "All Apps"}</h2>
         <p className="text-gray-600">
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus
           reiciendis eos laborum tempore quis hic quod cupiditate, consequuntur
         </p>
       </div>
 
-    {loading ? (
-        <span className="loading loading-bars loading-lg"></span>
-        // <div className="flex justify-center items-center">
-        //   <HashLoader color="#ad46ff" />
-        // </div>
-      ) : (
+    
         <div className="grid grid-cols-3 gap-5">
-          {apps.slice(0, 9).map((app, ind) => {
+          {apps.slice(0, from === "homepage" ? 9 : apps.length -1).map((app, ind) => {
             return <AppCard app={app} key={ind} />;
           })}
         </div>
-      )}
+      
 
       <div className="text-center mt-4">
-        <Link to="/apps">
+        <Link href={"/apps"}>
           <button className="btn bg-purple-500 text-white">View All</button>
         </Link>
       </div>
