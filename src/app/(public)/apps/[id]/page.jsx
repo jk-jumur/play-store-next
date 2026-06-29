@@ -2,6 +2,7 @@
 import InstallToggleButton from "@/components/apps/InstallToggleButton";
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 
 import { FaBuilding, FaDownload, FaStar } from "react-icons/fa";
@@ -18,6 +19,12 @@ export async function generateMetadata({params}){
   const apps = await appsPromise();
   const app = apps.find((app) => String(app.id) === id);
 
+    if(!app){
+        return{
+            title: `Not Found - play-store`,
+        
+        }
+    }
   return{
      title: `${app.title} - play store`,
      description: app.description,
